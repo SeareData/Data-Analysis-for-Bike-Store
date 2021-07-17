@@ -1,17 +1,18 @@
 
 
-----------BIKE STORE DATA ANALYSIS
+                               ----------BIKE STORE DATA ANALYSIS-----------
 
-----------I. Ad Hoc Requests.
+                                ----------I. Ad Hoc Requests-------------
 
 --1.Our customer Kaylee English said she put an order on April 1st/2018, but has not yet received her order. Does that database show that we shipped the order? If so when?
 
 Select order_date,order_status,shipped_date
 From sales.orders
-Where customer_id in(
+Where customer_id in
+(
 Select customer_id
-From sales.customers Where
-first_name= 'kaylee' and
+From sales.customers 
+Where first_name= 'kaylee' and
 last_name='English' and 
 order_date='2018-04-01'
 );
@@ -31,10 +32,12 @@ Where Product_name='Trek Slash 8 27.5 - 2016';
 Select first_name,last_name,order_date,total_purchase 
 From sales.orders
 Join 
-(Select order_id,sum(quantity*list_price*(1-discount)) As total_purchase
+(
+  Select order_id,sum(quantity*list_price*(1-discount)) As total_purchase
 From sales.order_items
-Group by order_id)As
-purchase_items On sales.orders.order_id=purchase_items.order_id
+Group by order_id
+)As purchase_items
+On sales.orders.order_id=purchase_items.order_id
 Join sales.stores
 On sales.stores.store_id=sales.orders.store_id
 Join sales.customers
@@ -59,7 +62,7 @@ And first_name='Margit'
 And last_name='osborn';
 
 
-  --------II.Quality Control Reports
+            --------II.Quality Control Reports----------
 
 --5.How much did Marcelene Boyer do in total sales for the month of april 2018?
 
@@ -69,7 +72,7 @@ And last_name='osborn';
  On sales.orders.staff_id=sales.staffs.staff_id
  Join sales.order_items
  On sales.order_items.order_id=sales.orders.order_id
- Where order_date between '2018-04-01' and '2018-04-30' 
+ Where order_date between '2018-04-01' And '2018-04-30' 
  And first_name='Marcelene' 
  And last_name='Boyer';
 
@@ -103,9 +106,11 @@ Order by list_price Desc;
 Select top_ten.product_id,product_name,top_ten.toptenth 
 From Production.products
 Join
-(select top 10 Sum(quantity*list_price*(1-discount))As toptenth,product_id
+(
+  select top 10 Sum(quantity*list_price*(1-discount))As toptenth,product_id
 From sales.order_items
-Group by product_id)As top_ten
+Group by product_id
+)As top_ten
 On production.products.product_id=top_ten.product_id;
 
 --10. What is our average ship time each month at each of our stores?
@@ -120,21 +125,25 @@ On sales.stores.store_id=sales.orders.store_id;
 Select product_id,product_name 
 From production.products
 Where product_id not in
-(Select product_id
+(
+  Select product_id
 From sales.orders
 Join sales.order_items
 On sales.order_items.order_id=sales.orders.order_id
-Where order_date>='2017-01-01')
+Where order_date>='2017-01-01'
+)
 
---III. Performance Reports/Dashboards
+                             -----------III. Performance Reports/Dashboards------------
 --12.What are our monthly sales numbers for each store.
 
    Select store_name,order_date,sales.total_sale
    From sales.orders
    Join
-   (Select order_id,Sum(quantity*list_price*(1-discount))As total_sale
+   (
+     Select order_id,Sum(quantity*list_price*(1-discount))As total_sale
    From sales.order_items
-   Group by order_id) As sales
+   Group by order_id
+   ) As sales
    On sales.order_id=sales.orders.order_id
    Join sales.stores
    On sales.stores.store_id=sales.orders.store_id
@@ -144,11 +153,13 @@ Where order_date>='2017-01-01')
   Select n_shipped.order_id,Product_name,n_shipped.store_name,n_shipped.shipped_date  
   From sales.order_items
   Join
-  (Select order_id,store_name,shipped_date
+  (
+    Select order_id,store_name,shipped_date
   From sales.orders
   Join sales.stores
   On sales.orders.store_id=sales.stores.store_id
-  Where order_status=3) As n_shipped
+  Where order_status=3
+  ) As n_shipped
   On n_shipped.order_id=sales.order_items.order_id
   join production.products
   on production.products.product_id=sales.order_items.product_id;
@@ -158,9 +169,11 @@ Where order_date>='2017-01-01')
   Select ss.staff_id, ss.first_name,ss.last_name,sales.order_id,sales.total_sale  
   From sales.orders
   Join
-  (Select order_id,Sum(list_price*quantity*(1-discount))As total_sale
+  (
+    Select order_id,Sum(list_price*quantity*(1-discount))As total_sale
   From sales.order_items 
-  Group by order_id) As sales
+  Group by order_id
+  ) As sales
   On sales.order_id=sales.orders.order_id
   Join sales.staffs As ss
   On ss.staff_id=sales.orders.staff_id
@@ -181,7 +194,8 @@ Order by store_name;
 
 Select sales.orders.order_id,zip_code,order_date,items.order_value
 From sales.orders
-Join(
+Join
+(
 Select top 20 Sum (list_price*quantity*(1-discount)) As  order_value,order_id
 From sales.order_items
 Group by order_id
@@ -196,9 +210,11 @@ Order by  order_value Desc;
 Select total_discount.order_id,store_name,total_discount.sales_discount,order_date
 From sales.orders
 join
-(Select order_id,Sum(discount*quantity*list_price) As sales_discount 
+(
+  Select order_id,Sum(discount*quantity*list_price) As sales_discount 
 From sales.order_items
-Group by order_id)As total_discount
+Group by order_id
+)As total_discount
 On total_discount.order_id=sales.orders.order_id
 Join sales.stores
 On sales.stores.store_id=sales.orders.store_id
@@ -209,10 +225,12 @@ Order by store_name;
 Select bn.brand_name,order_date,(quantity*list_price*(1-discount))as sales
 From sales.order_items   soi
 join
-(Select  pb.brand_id,brand_name,product_id
+(
+  Select  pb.brand_id,brand_name,product_id
 From production.brands     pb
 Join production.products   pp
-On pb.brand_id=pp.brand_id) As bn
+On pb.brand_id=pp.brand_id
+) As bn
 On soi.product_id=bn.product_id
 Join sales.orders so
 On so.order_id=soi.order_id
@@ -222,9 +240,11 @@ On so.order_id=soi.order_id
 Select category_name ,grand_total.product_id,grand_total.total_sales
 From production.products
 Join
-(Select product_id,sum(quantity*list_price*(1-discount)) As total_sales
+(
+  Select product_id,sum(quantity*list_price*(1-discount)) As total_sales
 From sales.order_items
-Group by product_id)As grand_total
+Group by product_id
+)As grand_total
 On grand_total.product_id=production.products.product_id
 Join
 production.categories
