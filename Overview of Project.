@@ -1,0 +1,26 @@
+# Data-Analysis-for-Bike-Store
+This are 19 Questions that a manager of this bike store wanted to be answered.This 19 questions are broadly classified in to three main catagories.
+(I) Ad Hoc Requests
+     (1) Our customer Kaylee English said she put an order on April 1st/2018, but has not yet received her order. Does that database show that we shipped the order? If so when?
+     (2) A new customer wants to buy 10 of our "Trek Slash 8 27.5-2016" product. do we have 10 of those currently in stock?
+     (3) How much money total has Jeanie Kirkland spent at our stores?
+     (4) How many of our "Electra Townie original 7D-2015/2016" did Margit Osborn order on 2/3/2016?
+(II) Quality Control Reports.
+     (5) How much did Marcelene Boyer do in total sales for the month of april 2018?
+     (6) I'd like to see a list of all orders that shipped after the required date, for each of our 3 stores.
+     (7) Get me a list of all products of which we have less than five units in stock.
+     (8) I am seeing some prices that were entered incorrectly. Can you run a report of all products where the price is more than 5000?
+     (9) What are our top 10 best selling products.
+     (10) What is our average ship time each month at each of our stores?
+     (11) What products have we not sold at all since January 1st,2017?
+(III) Performance Reports/Dashboards.
+     (12) What are our monthly sales numbers for each store.
+     (13) Can you give me a list of all of the orders that haven't been shipped yet for each store?
+     (14) I'd like to see a report of each employee's total sales for the years 2017 and 2018?
+     (15) I'd like to see each store's average order value each month for the last 12 months?
+     (16) I would  like to see a report of the top 20 zip codes with the greatest total sales for the last 12 months.
+     (17) Show me how much each store is giving in discounts each month? store name.
+     (18) How much did we sell of each product branded per year?
+     (19) I'd like to see the share of total sales of each product catagory.
+
+
