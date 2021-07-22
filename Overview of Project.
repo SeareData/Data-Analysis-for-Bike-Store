@@ -13,12 +13,12 @@ This are 19 Questions that a manager of this bike store wanted to be answered.Th
      (9) What are our top 10 best selling products.
      (10) What is our average ship time each month at each of our stores?
      (11) What products have we not sold at all since January 1st,2017?
+     (12) Can you give me a list of all of the orders that haven't been shipped yet for each store?
 (III) Performance Reports/Dashboards.
-     (12) What are our monthly sales numbers for each store.
-     (13) Can you give me a list of all of the orders that haven't been shipped yet for each store?
+     (13) What are our monthly sales numbers for each store.
      (14) I'd like to see a report of each employee's total sales for the years 2017 and 2018?
      (15) I'd like to see each store's average order value each month for the last 12 months?
-     (16) I would  like to see a report of the top 20 zip codes with the greatest total sales for the last 12 months.
+     (16) I would  like to see a report of the top 20 zip codes with the greatest total sales.
      (17) Show me how much each store is giving in discounts each month? store name.
      (18) How much did we sell of each product branded per year?
      (19) I'd like to see the share of total sales of each product catagory.
