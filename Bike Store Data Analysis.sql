@@ -133,22 +133,7 @@ On sales.order_items.order_id=sales.orders.order_id
 Where order_date>='2017-01-01'
 )
 
-                             -----------III. Performance Reports/Dashboards------------
---12.What are our monthly sales numbers for each store.
-
-   Select store_name,order_date,sales.total_sale
-   From sales.orders
-   Join
-   (
-     Select order_id,Sum(quantity*list_price*(1-discount))As total_sale
-   From sales.order_items
-   Group by order_id
-   ) As sales
-   On sales.order_id=sales.orders.order_id
-   Join sales.stores
-   On sales.stores.store_id=sales.orders.store_id
-
---13.can you give me a list of all of the orders that haven't been shipped yet for each store?
+--12.can you give me a list of all of the orders that haven't been shipped yet for each store?
 
   Select n_shipped.order_id,Product_name,n_shipped.store_name,n_shipped.shipped_date  
   From sales.order_items
@@ -163,6 +148,23 @@ Where order_date>='2017-01-01'
   On n_shipped.order_id=sales.order_items.order_id
   join production.products
   on production.products.product_id=sales.order_items.product_id;
+
+                             -----------III. Performance Reports/Dashboards------------
+--13.What are our monthly sales numbers for each store.
+
+   Select store_name,order_date,sales.total_sale
+   From sales.orders
+   Join
+   (
+     Select order_id,Sum(quantity*list_price*(1-discount))As total_sale
+   From sales.order_items
+   Group by order_id
+   ) As sales
+   On sales.order_id=sales.orders.order_id
+   Join sales.stores
+   On sales.stores.store_id=sales.orders.store_id
+
+
 
 --14.I'd like to see a report of each employee's total sales for the years 2017 and 2018?
 
@@ -190,7 +192,7 @@ Join sales.stores
 On sales.stores.store_id=sales.orders.store_id
 Order by store_name;
 
---16. I would  like to see a report of the top 20 zip codes with the greatest total sales for the last 12 months.
+--16. I would  like to see a report of the top 20 zip codes with the greatest total sales.
 
 Select sales.orders.order_id,zip_code,order_date,items.order_value
 From sales.orders
